@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31613.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KenshinChat.Server", "KenshinChat\KenshinChat.Server.csproj", "{8387839E-715A-4658-99DC-B883CB5824EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KenshinChat.Client", "KenshinChat.Client\KenshinChat.Client.csproj", "{8E08A59F-A429-47C9-9D8F-DF4D59827DD6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8387839E-715A-4658-99DC-B883CB5824EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8387839E-715A-4658-99DC-B883CB5824EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8387839E-715A-4658-99DC-B883CB5824EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8387839E-715A-4658-99DC-B883CB5824EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E08A59F-A429-47C9-9D8F-DF4D59827DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E08A59F-A429-47C9-9D8F-DF4D59827DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E08A59F-A429-47C9-9D8F-DF4D59827DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E08A59F-A429-47C9-9D8F-DF4D59827DD6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {532BEEB9-21D7-4E70-A31A-F9420473C78E}
+	EndGlobalSection
+EndGlobal
