@@ -1,6 +1,6 @@
 using System;
 
-namespace KenshinChat
+namespace KenshinChat.Server
 {
     public class WeatherForecast
     {

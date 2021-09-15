@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace KenshinChat.Client.Services
 {
-    public interface ILoginService
+    public interface IUserService
     {
-        Task<string> AttemptLogin(User user);
+        Task<LoginResponse> AttemptLogin(UserRequest user);
+        Task<LoginResponse> AttemptRegister(UserRequest user);
     }
 }

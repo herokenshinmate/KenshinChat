@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:KenshinChat.Client"
              xmlns:views="clr-namespace:KenshinChat.Client.Views"
              xmlns:utilities="clr-namespace:KenshinChat.Client.Utilities"
+             xmlns:enums="clr-namespace:KenshinChat.Client.Enums"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -13,6 +14,11 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <!-- Theme setting -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+                <!--Material Design-->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Green.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <!--User control switching-->
@@ -22,11 +28,17 @@
             <DataTemplate x:Key="Home">
                 <views:HomeView/>
             </DataTemplate>
+            <DataTemplate x:Key="Register">
+                <views:NewUser/>
+            </DataTemplate>
 
             <Style x:Key="kenshinContentStyle" TargetType="ContentControl">
                 <Setter Property="ContentTemplate" Value="{StaticResource Login}"/>
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsLoggedIn}" Value="True">
+                    <DataTrigger Binding="{Binding CurrentViewState}" Value="{x:Static enums:ViewState.Register}">
+                        <Setter Property="ContentTemplate" Value="{StaticResource Register}"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding CurrentViewState}" Value="{x:Static enums:ViewState.Home}">
                         <Setter Property="ContentTemplate" Value="{StaticResource Home}"/>
                     </DataTrigger>
                 </Style.Triggers>

@@ -16,7 +16,8 @@ namespace KenshinChat.Client.Utilities
         public ViewModelLocator()
         {
             container = new UnityContainer();
-            container.RegisterType<ILoginService, LoginService>();
+            container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IHubService, HubService>();
         }
 
         public MainWindowViewModel MainVM
