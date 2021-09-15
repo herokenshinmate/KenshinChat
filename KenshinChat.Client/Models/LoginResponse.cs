@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace KenshinChat.Client.Models
 {
-    public class User
+    public class LoginResponse
     {
         public int UserId { get; set; }
         public string Username { get; set; }
-        public bool IsOnline { get; set; }
+        public string AccessToken { get; set; }
+        public bool Success { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

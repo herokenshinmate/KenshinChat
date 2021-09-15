@@ -24,7 +24,7 @@ namespace KenshinChat.Client.Commands
         public bool CanExecute(object parameter)
         {
             if (!isExecuting && _canExecute == null) return true;
-            return (!isExecuting && _canExecute(parameter));
+            return !isExecuting && _canExecute(parameter);
         }
 
         public event EventHandler CanExecuteChanged

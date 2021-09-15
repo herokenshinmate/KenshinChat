@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="KenshinChat.Client.Views.Login"
+﻿<UserControl x:Class="KenshinChat.Client.Views.NewUser"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,11 +9,12 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Width="300">
             <TextBlock Text="User Name:" Padding="8"/>
-            <TextBox x:Name="username" Text="{Binding UserNameField, UpdateSourceTrigger=PropertyChanged}" Padding="8"/>
+            <TextBox x:Name="username" Text="{Binding Register_UsernameField, UpdateSourceTrigger=PropertyChanged}" Padding="8"/>
             <TextBlock Text="Password:" Padding="8"/>
-            <TextBox x:Name="password" Text="{Binding PasswordField, UpdateSourceTrigger=PropertyChanged}" Padding="8"/>
-            <Button Content="Login" Command="{Binding LoginCommand}" Margin="8"/>
-            <Button Content="Create New User" Command="{Binding ToRegisterCommand}" Margin="56"/>
+            <TextBox x:Name="password" Text="{Binding Register_PasswordField, UpdateSourceTrigger=PropertyChanged}" Padding="8"/>
+            <TextBlock Text="Re-Type Password:" Padding="8"/>
+            <TextBox x:Name="repassword" Text="{Binding Register_RePasswordField, UpdateSourceTrigger=PropertyChanged}" Padding="8"/>
+            <Button Content="Register" Command="{Binding RegisterCommand}" Margin="8"/>
         </StackPanel>
     </Grid>
 </UserControl>
