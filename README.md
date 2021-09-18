@@ -22,3 +22,5 @@ JWT Token is created on login or register, passed to the WPF which then uses it 
   - [ ] Private Channels (create your own channels, invite users to channels)
   - [ ] Send and Receive Images
   - [ ] Send and Receive Gifs
+
+## [Wiki](https://github.com/herokenshinmate/KenshinChat/wiki)
