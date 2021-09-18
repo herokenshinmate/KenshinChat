@@ -87,11 +87,14 @@ namespace KenshinChat.Client.Services
             return loginResponse;
         }
 
-        public async Task<byte[]> GetProfilePicture(int userId)
+        public async Task<byte[]> GetProfilePicture(string accessToken, int userId)
         {
             using HttpClient client = new HttpClient();
             string json = JsonConvert.SerializeObject(userId);
             StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            //Add access token
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
             var response = await client.PostAsync(URL + profilePictureEndPoint, data);
             string result = response.Content.ReadAsStringAsync().Result;

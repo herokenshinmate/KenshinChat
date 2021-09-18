@@ -12,6 +12,6 @@ namespace KenshinChat.Client.Services
     {
         Task<LoginResponse> AttemptLogin(UserRequest user);
         Task<LoginResponse> AttemptRegister(UserRequest user);
-        Task<byte[]> GetProfilePicture(int userId);
+        Task<byte[]> GetProfilePicture(string accessToken, int userId);
     }
 }

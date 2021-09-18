@@ -323,7 +323,7 @@ namespace KenshinChat.Client.ViewModels
                 //Get profile pictures
                 foreach (User user in users)
                 {
-                    user.ProfilePicture = await userService.GetProfilePicture(user.UserId);
+                    user.ProfilePicture = await userService.GetProfilePicture(currentUser.AccessToken, user.UserId);
                 }
 
                 await ctxTaskFactory.StartNew(() => HubUsers = new ObservableCollection<User>(users));
@@ -332,7 +332,7 @@ namespace KenshinChat.Client.ViewModels
 
         public async void AddNewUser(User newUser)
         {
-            newUser.ProfilePicture = await userService.GetProfilePicture(newUser.UserId);
+            newUser.ProfilePicture = await userService.GetProfilePicture(currentUser.AccessToken, newUser.UserId);
             await ctxTaskFactory.StartNew(() => HubUsers.Add(newUser));
         }
 

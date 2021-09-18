@@ -1,5 +1,6 @@
 ﻿using KenshinChat.Server.Auth;
 using KenshinChat.Server.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,7 @@ namespace KenshinChat.Server.Controllers
             });
         }
 
+        [Authorize]
         [HttpPost("GetProfilePicture")]
         public IActionResult GetProfilePicture([FromBody]int UserId)
         {
