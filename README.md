@@ -12,14 +12,16 @@ JWT Token is created on login or register, passed to the WPF which then uses it 
 
 
 ### Current Features:
-  - JWT Token Authorization & Authentication
-  - Profile Pictures (Profile pictures are stored as byte[])
-  - Online / Offline tracking
-  - Typing tracking
-  - Message History
+  - [x] JWT Token Authorization & Authentication
+  - [x] Profile Pictures (Profile pictures are stored as byte[])
+  - [x] Online / Offline tracking
+  - [x] Typing tracking
+  - [x] Message History
 
 #### Future Features:
-  - Private Channels (create your own channels, invite users to channels)
+  - [ ] Private Channels (create your own channels, invite users to channels)
+  - [ ] Send and Receive Images
+  - [ ] Send and Receive Gifs
 
 ## Technical
 
