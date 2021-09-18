@@ -23,8 +23,10 @@ namespace KenshinChat.Client.Services
 
         //Events
         public event Action<ChatMessage> RecieveMessage;
-        public event Action<List<User>> UsersUpdate;
+        public event Action<List<User>> GetAllUsers;
         public event Action<List<ChatMessage>> ReceiveChatLog;
+        public event Action<User> UpdateUser;
+        public event Action<User> AddNewUser;
 
         public async Task<bool> ConnectAsync(string accessToken)
         {
@@ -46,8 +48,10 @@ namespace KenshinChat.Client.Services
 
                 //Add our callback for messages
                 connection.On<ChatMessage>("ReceiveMessage", (cm) => RecieveMessage?.Invoke(cm));
-                connection.On<List<User>>("UsersUpdate", (l) => UsersUpdate?.Invoke(l));
+                connection.On<List<User>>("GetAllUsers", (l) => GetAllUsers?.Invoke(l));
                 connection.On<List<ChatMessage>>("ReceiveChatLog", (d) => ReceiveChatLog?.Invoke(d));
+                connection.On<User>("UpdateUser", (u) => UpdateUser?.Invoke(u));
+                connection.On<User>("AddNewUser", (u) => AddNewUser?.Invoke(u));
 
                 await connection.StartAsync();
 
@@ -66,7 +70,12 @@ namespace KenshinChat.Client.Services
 
         public async Task RegisterToHub(CurrentUser user)
         {
-            await connection.InvokeAsync("RegisterToHub", new User { UserId = user.UserId, Username = user.Username, IsOnline = true });
+            await connection.InvokeAsync("RegisterToHub", new User { UserId = user.UserId, ProfilePicture = user.ProfilePicture, Username = user.Username, IsOnline = true });
+        }
+
+        public async Task UpdateIsTyping(bool isTyping)
+        {
+            await connection.InvokeAsync("SetIsTyping", isTyping);
         }
     }
 }

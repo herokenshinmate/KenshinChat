@@ -18,6 +18,7 @@ namespace KenshinChat.Client.Utilities
             container = new UnityContainer();
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IHubService, HubService>();
+            container.RegisterType<IDialogService, DialogService>();
         }
 
         public MainWindowViewModel MainVM

@@ -46,6 +46,8 @@
 
             <!--Dependancy Injection Service-->
             <utilities:ViewModelLocator x:Key="VMLocator"/>
+            <BitmapImage x:Key="BlankImage" UriSource="/Img/blank.png"/>
+            <utilities:ByteBitmapSourceConverter x:Key="ByteBmpSrcConverter"/>
 
         </ResourceDictionary>
 

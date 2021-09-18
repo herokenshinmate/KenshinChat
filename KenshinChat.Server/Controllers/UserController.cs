@@ -36,6 +36,7 @@ namespace KenshinChat.Server.Controllers
             return new ObjectResult(new
             {
                 UserId = _user.UserId,
+                ProfilePicture = _user.ProfilePicture,
                 _user.Username,
                 AccessToken = accessToken
             });
@@ -67,8 +68,20 @@ namespace KenshinChat.Server.Controllers
             return new ObjectResult(new
             {
                 user.UserId,
+                ProfilePicture = user.ProfilePicture,
                 user.Username,
-                access_token = accessToken
+                AccessToken = accessToken
+            });
+        }
+
+        [HttpPost("GetProfilePicture")]
+        public IActionResult GetProfilePicture([FromBody]int UserId)
+        {
+            byte[] img = _db.Users.FirstOrDefault(u => u.UserId == UserId).ProfilePicture;
+
+            return new ObjectResult(new
+            {
+                ProfilePicture = img
             });
         }
     }

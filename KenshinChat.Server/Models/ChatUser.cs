@@ -10,5 +10,6 @@ namespace KenshinChat.Server.Models
         public int UserId { get; set; }
         public string UserName { get; set; }
         public bool IsOnline { get; set; }
+        public bool IsTyping { get; set; }
     }
 }

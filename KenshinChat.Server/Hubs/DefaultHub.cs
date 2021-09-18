@@ -31,7 +31,7 @@ namespace KenshinChat.Server.Hubs
                 updated.IsOnline = false;
                 ChatClients.TryUpdate(Context.ConnectionId, updated, user);
 
-                await Clients.All.SendAsync("UsersUpdate", ChatClients.Values.ToList());
+                await Clients.AllExcept(Context.ConnectionId).SendAsync("UpdateUser", updated);
             }
 
             await base.OnDisconnectedAsync(exception);
@@ -53,8 +53,11 @@ namespace KenshinChat.Server.Hubs
 
             ChatClients.TryAdd(Context.ConnectionId, newChatUser);
 
-            //Send the clients the new list of users
-            await Clients.All.SendAsync("UsersUpdate", ChatClients.Values.ToList());
+            //Send the client the list of users
+            await Clients.Caller.SendAsync("GetAllUsers", ChatClients.Values.ToList());
+
+            //Send all the other clients the new client
+            await Clients.AllExcept(Context.ConnectionId).SendAsync("AddNewUser", newChatUser);
 
             //Send the client the chat log
             await Clients.Caller.SendAsync("ReceiveChatLog", Chat.Values.ToList());
@@ -71,6 +74,21 @@ namespace KenshinChat.Server.Hubs
             Chat.TryAdd(messenger, message);
 
             await Clients.All.SendAsync("ReceiveMessage", message);
+        }
+
+        public async Task SetIsTyping(bool isTyping)
+        {
+            ChatUser oldUser, updatedUser;
+            ChatClients.TryGetValue(Context.ConnectionId, out oldUser);
+            if (oldUser != null)
+            {
+                updatedUser = oldUser;
+                updatedUser.IsTyping = isTyping;
+
+                ChatClients.TryUpdate(Context.ConnectionId, updatedUser, oldUser);
+
+                await Clients.AllExcept(Context.ConnectionId).SendAsync("UpdateUser", updatedUser);
+            }
         }
     }
 }
