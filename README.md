@@ -28,7 +28,7 @@ JWT Token is created on login or register, passed to the WPF which then uses it 
 ## EndPoints
 
 ### [POST] api/User/login
-##### Authenticated: 
+##### Authorized: 
 False
 ##### PostBody
 ```
@@ -50,7 +50,7 @@ False
 ```
 
 ### [POST] api/User/register
-##### Authenticated: 
+##### Authorized: 
 False
 ##### PostBody
 ```
@@ -72,7 +72,7 @@ False
 ```
 
 ### [POST] api/User/GetProfilePicture
-##### Authenticated: 
+##### Authorized: 
 True
 ##### PostBody
 ```
