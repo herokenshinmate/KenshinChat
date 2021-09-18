@@ -10,6 +10,7 @@ namespace KenshinChat.Server.Models
     {
         [Required]
         public int UserId { get; set; }
+        public byte[] ProfilePicture { get; set; }
         [Required]
         public string Username { get; set; }
         [Required]

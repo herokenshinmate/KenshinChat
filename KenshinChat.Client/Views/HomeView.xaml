@@ -15,27 +15,44 @@
         
         <!-- Participants Template -->
         <DataTemplate x:Key="ParticipantsDataTemplate">
-            <Border BorderThickness="0,0,0,1" BorderBrush="{DynamicResource MaterialDesignDivider}"
-                    Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}}"
-                    Height="50" Margin="-2,0,0,0">
+            <materialDesignMahApps:Card Height="50" Width="200">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="20"/>
                     </Grid.ColumnDefinitions>
                     <Rectangle x:Name="ParticipantRct" Fill="{DynamicResource PrimaryHueMidBrush}"
                                Visibility="Hidden"/>
 
+                    <!--Pic-->
+                    <Grid Grid.Column="1" Margin="6" SnapsToDevicePixels="True">
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=ClipEllipse}"/>
+                        </Grid.OpacityMask>
+                        <Ellipse x:Name="ClipEllipse" Fill="White"/>
+                        <materialDesign:PackIcon Kind="AccountCircle" SnapsToDevicePixels="True" Width="Auto" Height="Auto"
+                                                 Margin="-4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        <Image Source="{Binding ProfilePicture, Converter={StaticResource ByteBmpSrcConverter},
+                            TargetNullValue={StaticResource BlankImage}}" Stretch="UniformToFill"/>
+                    </Grid>
+                    
                     <!--Name-->
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left"
                                Margin="5,0" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"
                                Text="{Binding Username}" SnapsToDevicePixels="True"/>
 
+                    <!--Typing icon-->
+                    <materialDesign:PackIcon Name="TypingIcon" Grid.Column="3" SnapsToDevicePixels="True"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"
+                                             Kind="ChatProcessingOutline" Opacity="0.8" Visibility="Hidden"/>
+
                     <!--Online-->
-                    <Ellipse Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                             Width="8" Height="8">
-                        <Ellipse.Style>
-                            <Style TargetType="Ellipse">
+                    <Rectangle Grid.Column="0">
+                        <Rectangle.Style>
+                            <Style TargetType="Rectangle">
                                 <Setter Property="Fill" Value="#F44336"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsOnline}" Value="True">
@@ -43,14 +60,17 @@
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Ellipse.Style>
-                    </Ellipse>
+                        </Rectangle.Style>
+                    </Rectangle>
                 </Grid>
-            </Border>
+            </materialDesignMahApps:Card>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding Path=IsSelected,
                     RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}}" Value="true">
                     <Setter Property="Visibility" TargetName="ParticipantRct" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsTyping}" Value="True">
+                    <Setter TargetName="TypingIcon" Property="Visibility" Value="Visible"/>
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
@@ -104,46 +124,56 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        
         <!-- Online Users Section -->
-        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Grid.RowSpan="1" BorderThickness="0,0,0,1" SnapsToDevicePixels="True"
-                BorderBrush="{DynamicResource MaterialDesignDivider}">
-            <ListBox ItemsSource="{Binding HubUsers}" 
+        <ListBox Grid.Row="0" Grid.Column="0" 
+            ItemsSource="{Binding HubUsers}" 
                      ItemTemplate="{DynamicResource ParticipantsDataTemplate}"
-                     ItemContainerStyle="{DynamicResource ParticipantsListBoxItemStyle}"
                      Focusable="False"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        </Border>
 
         <!-- User Display Section -->
-        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Grid.RowSpan="1" Margin="4,12,4,12" SnapsToDevicePixels="True"
-                BorderBrush="{DynamicResource MaterialDesignDivider}" CornerRadius="8" Background="{DynamicResource PrimaryHueMidBrush}">
-            <Grid Margin="4,12,4,12">
+        <materialDesignMahApps:Card Grid.Row="2" Height="50" Margin="8,0,8,0">
+            <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
 
-                <!--Name-->
-                <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"
-                               Margin="5,0" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"
-                               Text="{Binding currentUser.Username}" SnapsToDevicePixels="True" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
+                <!--Pic-->
+                <Grid Grid.Column="1" Margin="6" SnapsToDevicePixels="True">
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=LoggedUserClipEllipse}"/>
+                    </Grid.OpacityMask>
+                    <Ellipse x:Name="LoggedUserClipEllipse" Fill="White"/>
+                    <materialDesign:PackIcon Kind="AccountCircle" SnapsToDevicePixels="True" Width="Auto" Height="Auto"
+                                                 Margin="-4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Image Source="{Binding currentUser.ProfilePicture, Converter={StaticResource ByteBmpSrcConverter},
+                            TargetNullValue={StaticResource BlankImage}}" Stretch="UniformToFill"/>
+                </Grid>
 
                 <!--Online-->
-                <Ellipse Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                             Width="8" Height="8" Fill="#64DD17"/>
+                <Rectangle Grid.Column="0" x:Name="ParticipantRct" Fill="{DynamicResource PrimaryHueMidBrush}" />
+
+                <!--Name-->
+                <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="5,0" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"
+                               Text="{Binding currentUser.Username}" SnapsToDevicePixels="True"/>
+
             </Grid>
-        </Border>
-        
+        </materialDesignMahApps:Card>
+             
         <!-- Message Content Area -->
         <Border Grid.Row="0" Grid.Column="1" BorderThickness="1,0,0,1" BorderBrush="{DynamicResource MaterialDesignDivider}">
             <ItemsControl x:Name="MessagesItemsCtrl" Margin="5" 
@@ -168,7 +198,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox Grid.Column="0" Margin="16" x:Name="ChatBox" Text="{Binding ChatBox}"/>
+                <TextBox Grid.Column="0" Margin="16" x:Name="ChatBox" Text="{Binding ChatBox, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Grid.Column="1" Margin="16, 0" Content="Send" Command="{Binding SendMessageCommand}"/>
             </Grid>
         </Border>

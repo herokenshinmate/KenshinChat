@@ -1,4 +1,5 @@
 ﻿using KenshinChat.Client.Models;
+using KenshinChat.Client.Models.ResponseModels;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
@@ -16,6 +17,7 @@ namespace KenshinChat.Client.Services
         private readonly string URL = "http://localhost:47252/api/";
         private readonly string loginEndPoint = "User/login";
         private readonly string registerEndPoint = "User/register";
+        private readonly string profilePictureEndPoint = "User/GetProfilePicture";
 
         public async Task<LoginResponse> AttemptLogin(UserRequest user)
         {
@@ -57,7 +59,7 @@ namespace KenshinChat.Client.Services
             StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await client.PostAsync(URL + registerEndPoint, data);
-            LoginResponse loginResponse;         
+            LoginResponse loginResponse;
 
             if (response.IsSuccessStatusCode)
             {
@@ -83,6 +85,22 @@ namespace KenshinChat.Client.Services
             }
 
             return loginResponse;
+        }
+
+        public async Task<byte[]> GetProfilePicture(string accessToken, int userId)
+        {
+            using HttpClient client = new HttpClient();
+            string json = JsonConvert.SerializeObject(userId);
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            //Add access token
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var response = await client.PostAsync(URL + profilePictureEndPoint, data);
+            string result = response.Content.ReadAsStringAsync().Result;
+            ProfilePictureResponse ProfilePicture = JsonConvert.DeserializeObject<ProfilePictureResponse>(result);
+
+            return ProfilePicture.ProfilePicture;
         }
     }
 }

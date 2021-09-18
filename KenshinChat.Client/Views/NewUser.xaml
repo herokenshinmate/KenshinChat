@@ -3,17 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:KenshinChat.Client.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Width="300">
+            <Grid HorizontalAlignment="Center" Width="120" Height="120" VerticalAlignment="Center"
+                          Margin="0,16,0,0" SnapsToDevicePixels="True">
+                <Grid.OpacityMask>
+                    <VisualBrush Visual="{Binding ElementName=ClipEllipse}"/>
+                </Grid.OpacityMask>
+                <Ellipse x:Name="ClipEllipse" Fill="White" Stroke="{DynamicResource PrimaryHueDarkBrush}"/>
+                <materialDesign:PackIcon Kind="AccountCircle" Width="144" Height="144" Margin="-12" Foreground="{DynamicResource PrimaryHueDarkBrush}"/>
+                <Image Width="100" Height="100" Source="{Binding Register_ProfilePic, FallbackValue={StaticResource BlankImage},
+                            TargetNullValue={StaticResource BlankImage}}"/>
+                <Ellipse Stroke="{DynamicResource PrimaryHueDarkBrush}" StrokeThickness="1" UseLayoutRounding="True" Opacity="0.2"/>
+                <Button Height="120"
+                        Opacity="0"
+                        Command="{Binding SelectProfilePicCommand}"
+                        ToolTip="Click to select picture">
+                    
+                </Button>
+            </Grid>
             <TextBlock Text="User Name:" Padding="8"/>
             <TextBox x:Name="username" Text="{Binding Register_UsernameField, UpdateSourceTrigger=PropertyChanged}" Padding="8"/>
             <TextBlock Text="Password:" Padding="8"/>
             <TextBox x:Name="password" Text="{Binding Register_PasswordField, UpdateSourceTrigger=PropertyChanged}" Padding="8"/>
-            <TextBlock Text="Re-Type Password:" Padding="8"/>
-            <TextBox x:Name="repassword" Text="{Binding Register_RePasswordField, UpdateSourceTrigger=PropertyChanged}" Padding="8"/>
             <Button Content="Register" Command="{Binding RegisterCommand}" Margin="8"/>
         </StackPanel>
     </Grid>
